@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Page from "./Page";
 import Axios from "axios";
 
 function HomeGuest() {
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -41,6 +45,7 @@ function HomeGuest() {
                 type="text"
                 placeholder="Pick a username"
                 autoComplete="off"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -54,6 +59,7 @@ function HomeGuest() {
                 type="text"
                 placeholder="you@example.com"
                 autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="form-group">
@@ -66,6 +72,7 @@ function HomeGuest() {
                 className="form-control"
                 type="password"
                 placeholder="Create a password"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <button
