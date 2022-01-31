@@ -14,11 +14,9 @@ function HeaderLoggedOut(props) {
         password,
       });
       if (response.data) {
-        const { token, username, avatar } = response.data;
-        localStorage.setItem("complexAppToken", token);
-        localStorage.setItem("complexAppUsername", username);
-        localStorage.setItem("complexAppAvatar", avatar);
-        appDispatch({ type: "login" });
+        // const { token, username, avatar } = response.data;
+
+        appDispatch({ type: "login", data: response.data });
       } else {
         console.log(`Incorrect username \ password!`);
       }
