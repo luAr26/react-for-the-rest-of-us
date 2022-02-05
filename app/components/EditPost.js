@@ -35,25 +35,43 @@ function EditPost() {
         draft.isFetching = false;
         return;
       case "titleChange":
+        draft.title.hasErrors = false;
         draft.title.value = action.value;
         return;
       case "bodyChange":
+        draft.body.hasErrors = false;
         draft.body.value = action.value;
         return;
       case "submitRequest":
-        draft.sendCount++;
+        if (!draft.title.hasErrors && !draft.body.hasErrors) {
+          draft.sendCount++;
+        }
         return;
       case "saveRequestStarted":
         draft.isSaving = true;
         return;
       case "saveRequestFinished":
         draft.isSaving = false;
+      case "titleRules":
+        if (!draft.title.value.trim()) {
+          draft.title.hasErrors = true;
+          draft.title.message = "You must provide a title.";
+        }
+        return;
+      case "bodyRules":
+        if (!draft.body.value.trim()) {
+          draft.body.hasErrors = true;
+          draft.body.message = "You must provide body content.";
+        }
+        return;
     }
   }
   const [state, dispatch] = useImmerReducer(ourReducer, originalState);
 
   function submitHandler(e) {
     e.preventDefault();
+    dispatch({ type: "titleRules", value: state.title.value });
+    dispatch({ type: "bodyRules", value: state.body.value });
     dispatch({ type: "submitRequest" });
   }
 
@@ -132,7 +150,15 @@ function EditPost() {
             onChange={(e) =>
               dispatch({ type: "titleChange", value: e.target.value })
             }
+            onBlur={(e) =>
+              dispatch({ type: "titleRules", value: e.target.value })
+            }
           />
+          {state.title.hasErrors && (
+            <div className="alert alert-danger small liveValidateMessage">
+              {state.title.message}
+            </div>
+          )}
         </div>
 
         <div className="form-group">
@@ -148,7 +174,15 @@ function EditPost() {
             onChange={(e) =>
               dispatch({ type: "bodyChange", value: e.target.value })
             }
+            onBlur={(e) =>
+              dispatch({ type: "bodyRules", value: e.target.value })
+            }
           />
+          {state.body.hasErrors && (
+            <div className="alert alert-danger small liveValidateMessage">
+              {state.body.message}
+            </div>
+          )}
         </div>
 
         <button className="btn btn-primary" disabled={state.isSaving}>
