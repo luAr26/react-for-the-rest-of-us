@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Page from "./Page";
+import NotFound from "./NotFound";
 import { useParams, Link } from "react-router-dom";
 import Axios from "axios";
 import LoadingDotsIcon from "./LoadingDotsIcon";
@@ -29,6 +30,10 @@ function ViewSinglePost() {
       ourRequest.cancel();
     };
   }, []);
+
+  if (!isLoading && !post) {
+    return <NotFound />;
+  }
 
   if (isLoading) {
     return (
