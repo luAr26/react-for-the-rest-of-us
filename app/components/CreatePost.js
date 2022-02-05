@@ -25,7 +25,7 @@ function CreatePost(props) {
       navigate(`/post/${response.data}`);
       console.log("New Post was created.");
     } catch (e) {
-      console.log("There was a problem!");
+      console.log("There was a problem!!");
     }
   }
   return (
