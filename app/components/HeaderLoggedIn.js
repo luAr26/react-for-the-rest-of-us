@@ -40,7 +40,7 @@ function HeaderLoggedIn(props) {
         to={`/profile/${appState.user.username}`}
         className="mr-2"
         data-for="profile"
-        data-tip="My Profile"
+        data-tip={`My Profile (${appState.user.username})`}
       >
         <img className="small-header-avatar" src={appState.user.avatar} />
       </Link>

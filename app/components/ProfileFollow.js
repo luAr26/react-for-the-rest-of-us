@@ -37,7 +37,6 @@ function ProfileFollow(props) {
   if (posts.length === 0 && props.action === "followers") {
     return <p>This user doesn't have any followers right now ;)</p>;
   }
-  console.log(posts);
   return (
     <div className="list-group">
       {posts.map((follower, index) => {
