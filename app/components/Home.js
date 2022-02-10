@@ -42,7 +42,6 @@ function Home() {
   }, []);
 
   if (state.isLoading) return <LoadingDotsIcon />;
-  console.log(state.feed);
   return (
     <Page title="Your Feed">
       {state.feed.length > 0 && (
