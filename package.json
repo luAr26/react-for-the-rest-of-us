@@ -4,8 +4,11 @@
   "description": "",
   "main": "test.js",
   "scripts": {
-    "dev": "webpack serve",
+    "dev": "npm-run-all -s generate webpackDev",
+    "webpackDev": "webpack serve",
+    "build": "npm-run-all -s generate webpackBuild",
     "webpackBuild": "webpack",
+    "generate": "babel-node --presets=@babel/preset-react,@babel/preset-env generateHTML.js",
     "previewDist": "node previewDist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,6 +25,7 @@
   "homepage": "https://github.com/luAr26/react-for-the-rest-of-us#readme",
   "dependencies": {
     "@babel/core": "^7.16.12",
+    "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
     "@babel/preset-react": "^7.16.7",
     "axios": "^0.25.0",
@@ -32,6 +36,7 @@
     "fs-extra": "^10.0.0",
     "html-webpack-harddisk-plugin": "^2.0.0",
     "immer": "^9.0.12",
+    "npm-run-all": "^4.1.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-markdown": "^8.0.0",
